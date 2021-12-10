@@ -25,14 +25,14 @@ for y, row in enumerate(grid):
 
 print(sum([grid[lp.y][lp.x] + 1 for lp in low_points]))
 
-def probe(p, basin=None, indent=0):
+def probe(p, basin=None):
     val = grid[p.y][p.x]
     if basin is None:
         basin = set()
     for a in adjacent(p):
         if grid[a.y][a.x] > val and grid[a.y][a.x] != 9:
             basin.add(a)
-            probe(a, basin, indent + 1)
+            probe(a, basin)
     return len(basin)
 
 basins = sorted([probe(lp) + 1 for lp in low_points], reverse=True)
